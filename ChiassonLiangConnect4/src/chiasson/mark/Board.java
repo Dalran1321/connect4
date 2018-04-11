@@ -1,7 +1,7 @@
 package chiasson.mark;
 
-import liang.fred.Cell;
-import liang.fred.ColorState;
+import chiasson.mark.Cell;
+import chiasson.mark.ColorState;
 
 public class Board {
 	private Cell[][] board;
