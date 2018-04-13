@@ -29,6 +29,7 @@ public class Cell {
 		return color;
 	}
 
+
 	public String toString() {
 		switch (color) {
 		case NULL:
