@@ -50,30 +50,51 @@ public class Driver {
 					if (value.equals("1")) {
 						board.fill(5 - colNum[0], 0, board.getColor(x, y), playerColor(turns));
 						done = board.check(playerColor(turns));
+						if (colNum[0]>=4){
+							colNum[0] = 4;
+						}
 						colNum[0]++;
 					} else if (value.equals("2")) {
 						board.fill(5 - colNum[1], 1, board.getColor(x, y), playerColor(turns));
 						done = board.check(playerColor(turns));
+						if (colNum[1]>=4){
+							colNum[1] = 4;
+						}
 						colNum[1]++;
 					} else if (value.equals("3")) {
 						board.fill(5 - colNum[2], 2, board.getColor(x, y), playerColor(turns));
 						done = board.check(playerColor(turns));
+						if (colNum[2]>=4){
+							colNum[2] = 4;
+						}
 						colNum[2]++;
 					} else if (value.equals("4")) {
 						board.fill(5 - colNum[3], 3, board.getColor(x, y), playerColor(turns));
 						done = board.check(playerColor(turns));
+						if (colNum[3]>=4){
+							colNum[3] = 4;
+						}
 						colNum[3]++;
 					} else if (value.equals("5")) {
 						board.fill(5 - colNum[4], 4, board.getColor(x, y), playerColor(turns));
 						done = board.check(playerColor(turns));
+						if (colNum[4]>=4){
+							colNum[4] = 4;
+						}
 						colNum[4]++;
 					} else if (value.equals("6")) {
 						board.fill(5 - colNum[5], 5, board.getColor(x, y), playerColor(turns));
 						done = board.check(playerColor(turns));
+						if (colNum[5]>=4){
+							colNum[5] = 4;
+						}
 						colNum[5]++;
 					} else if (value.equals("7")) {
 						board.fill(5 - colNum[6], 6, board.getColor(x, y), playerColor(turns));
 						done = board.check(playerColor(turns));
+						if (colNum[6]>=4){
+							colNum[6] = 4;
+						}
 						colNum[6]++;
 					}
 				}

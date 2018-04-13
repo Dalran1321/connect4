@@ -14,7 +14,7 @@ public class Board {
 		cols = aCols;
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
-				board[i][j] = new Cell(randomColor()); // no color
+				board[i][j] = new Cell(nullColor()); // no color
 			}
 		}
 	}
@@ -22,7 +22,7 @@ public class Board {
 	final static int SIZE = ColorState.values().length;
 	final static ColorState[] STATES = ColorState.values();
 
-	private static ColorState randomColor() {
+	private static ColorState nullColor() {
 		return STATES[2];
 	}
 
