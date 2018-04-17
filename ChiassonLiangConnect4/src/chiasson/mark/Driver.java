@@ -3,6 +3,7 @@ package chiasson.mark;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Driver {
 
@@ -43,56 +44,61 @@ public class Driver {
 			x = 0;
 			y = 0;
 			value = in.nextLine().trim().toUpperCase();
+			
 			if (values.contains(value)) {
+				if (turns % 2 == 0){
+					String v [] = {"1","2","3","4","5","6","7"};
+					value = v[(int)Math.random()];
+				}
 				if (value.equals("0")) {
 					done = true;
 				} else {
 					if (value.equals("1")) {
 						board.fill(5 - colNum[0], 0, board.getColor(x, y), playerColor(turns));
 						done = board.check(playerColor(turns));
-						if (colNum[0]>=4){
+						if (colNum[0] >= 4) {
 							colNum[0] = 4;
 						}
 						colNum[0]++;
 					} else if (value.equals("2")) {
 						board.fill(5 - colNum[1], 1, board.getColor(x, y), playerColor(turns));
 						done = board.check(playerColor(turns));
-						if (colNum[1]>=4){
+						if (colNum[1] >= 4) {
 							colNum[1] = 4;
 						}
 						colNum[1]++;
 					} else if (value.equals("3")) {
 						board.fill(5 - colNum[2], 2, board.getColor(x, y), playerColor(turns));
 						done = board.check(playerColor(turns));
-						if (colNum[2]>=4){
+						if (colNum[2] >= 4) {
 							colNum[2] = 4;
 						}
 						colNum[2]++;
 					} else if (value.equals("4")) {
 						board.fill(5 - colNum[3], 3, board.getColor(x, y), playerColor(turns));
 						done = board.check(playerColor(turns));
-						if (colNum[3]>=4){
+						if (colNum[3] >= 4) {
 							colNum[3] = 4;
 						}
 						colNum[3]++;
 					} else if (value.equals("5")) {
 						board.fill(5 - colNum[4], 4, board.getColor(x, y), playerColor(turns));
 						done = board.check(playerColor(turns));
-						if (colNum[4]>=4){
+						if (colNum[4] >= 4) {
 							colNum[4] = 4;
 						}
 						colNum[4]++;
 					} else if (value.equals("6")) {
 						board.fill(5 - colNum[5], 5, board.getColor(x, y), playerColor(turns));
 						done = board.check(playerColor(turns));
-						if (colNum[5]>=4){
+						if (colNum[5] >= 4) {
 							colNum[5] = 4;
 						}
 						colNum[5]++;
 					} else if (value.equals("7")) {
 						board.fill(5 - colNum[6], 6, board.getColor(x, y), playerColor(turns));
 						done = board.check(playerColor(turns));
-						if (colNum[6]>=4){
+						if (colNum[6] >= 4) {
 							colNum[6] = 4;
 						}
 						colNum[6]++;
