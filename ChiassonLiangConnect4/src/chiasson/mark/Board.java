@@ -61,12 +61,8 @@ public class Board {
 		// display();
 		Thread.sleep(100);
 
-		// TODO replace the first 2 arguments of the recursive fill method call
-		// Lookup UP, RIGHT, DOWN, LEFT
 		fill(x, y, newColor, replaceColor);
-		// fill(x,y+1 , newColor,replaceColor);
-		// fill(x+1, y, newColor,replaceColor);
-		// fill(x, y-1, newColor,replaceColor);
+
 
 		return;
 	}
