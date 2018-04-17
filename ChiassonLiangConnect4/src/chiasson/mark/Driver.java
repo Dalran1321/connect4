@@ -16,6 +16,7 @@ public class Driver {
 		final int COLS = 7;
 
 		int[] colNum = new int[7];
+		String v [] = {"1","2","3","4","5","6","7"};
 
 		// create the board
 		Board board = new Board(ROWS, COLS);
@@ -37,6 +38,7 @@ public class Driver {
 		// Always fill from top left corner
 		int x = 0;
 		int y = 0;
+		Random r = new Random();
 
 		int turns = 1;
 		System.out.print("Connect four to win");
@@ -44,11 +46,9 @@ public class Driver {
 			x = 0;
 			y = 0;
 			value = in.nextLine().trim().toUpperCase();
-			
 			if (values.contains(value)) {
 				if (turns % 2 == 0){
-					String v [] = {"1","2","3","4","5","6","7"};
-					value = v[(int)Math.random()];
+					value = v[r.nextInt(6)];
 				}
 				if (value.equals("0")) {
 					done = true;
