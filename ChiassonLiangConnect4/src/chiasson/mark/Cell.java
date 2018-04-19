@@ -2,44 +2,42 @@ package chiasson.mark;
 
 
 
-import chiasson.mark.ColorState;
+import chiasson.mark.CellState;
 
 public class Cell {
-	private ColorState color;
-	private boolean visited;
+	private CellState state;
 	
-	public Cell(ColorState cs) {
-		color = cs;
-		visited = false;
+	public Cell(CellState cs) {
+		state = cs;
+	}
+
+	
+	public Cell() {
+		state = CellState.EMPTY;
+
 	}
 	
-	public void setVisited(boolean value){
-		visited = value;
+	public void setState (CellState cs){
+		state = cs;
 	}
 	
-	public boolean hasVisited(){
-		return visited;
-	}
-	
-	public void setColor (ColorState cs){
-		color = cs;
-	}
-	
-	public ColorState getColor() {
-		return color;
+	public CellState getState() {
+		return state;
 	}
 
 
 	public String toString() {
-		switch (color) {
-		case NULL:
-			return "+";
-		case RED:
+		switch (state) {
+		case EMPTY:
+			return "-";
+		case P1:
 			return "R";
-		case BLUE:
+		case P2:
 			return "B";
 		default:
 			return "-";
 		}
 	}
+
+
 }

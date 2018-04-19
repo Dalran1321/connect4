@@ -1,7 +1,7 @@
 package chiasson.mark;
 
 import chiasson.mark.Cell;
-import chiasson.mark.ColorState;
+import chiasson.mark.CellState;
 
 public class Board {
 	private Cell[][] board;
@@ -14,70 +14,55 @@ public class Board {
 		cols = aCols;
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < cols; j++) {
-				board[i][j] = new Cell(nullColor()); // no color
+				board[i][j] = new Cell(); // no color
 			}
 		}
 	}
 
-	final static int SIZE = ColorState.values().length;
-	final static ColorState[] STATES = ColorState.values();
-
-	private static ColorState nullColor() {
-		return STATES[2];
-	}
-
-	public ColorState getColor(int x, int y) {
-		return board[x][y].getColor();
+	public CellState getState(int x, int y) {
+		return  board[x][y].getState();
 	}
 
 	public boolean isValid(int x, int y) {
 		return (x >= 0 && x < rows) && (y >= 0 && y < cols);
 	}
 
-	public void unVisit() {
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < cols; j++) {
-				board[i][j].setVisited(false);
-			}
+	public boolean isColumnFilled(int col) {
+		if(board[0][col - 1].getState() != CellState.EMPTY) {
+			return true;
 		}
+		return false;
 	}
 
-	public void fill(int x, int y, ColorState newColor, ColorState replaceColor) throws InterruptedException {
-		if (!isValid(x, y)) {
-			return;
-		}
-		if (newColor == replaceColor) {
-			return;
-		}
-		if (board[x][y].hasVisited()) {
-			return;
-		}
-		if (board[x][y].getColor() != newColor) {
-			return;
-		}
-		// not the same color
-		board[x][y].setColor(replaceColor);
-		board[x][y].setVisited(true);
-		// display();
-		Thread.sleep(100);
+	public int place(int col, CellState player) {
 
-		fill(x, y, newColor, replaceColor);
+		int r = rows ;
+		int c = col -1 ;
 
-
-		return;
+		boolean foundRow = false;
+		while (!foundRow) {
+			if (board[r-1][c].getState() == CellState.EMPTY) {
+				foundRow = true;
+			}
+			r--;
+		}
+		board[r][c].setState(player);
+		return r;
 	}
 
-	public boolean check(ColorState cs) {
-
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < cols; j++) {
-				if (board[i][j].getColor() != cs) {
-					return false;
-				}
+	/*public boolean isVerticalWinner(int col) {
+		int counter =0;
+		if(place<=4) {
+			for (int i =0; i<=4; i++) {
+				if (board[r][col].getState() == board[r-i][col].getState())
+				counter++;
 			}
 		}
+		if (counter==4) {
 		return true;
-	}
+		}
+		return false;
+	}*/
 
 	public void display() {
 		System.out.println("CONNECT FOUR BOARD");
