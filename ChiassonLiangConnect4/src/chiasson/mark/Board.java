@@ -53,14 +53,14 @@ public class Board {
 	public boolean isVerticalWinner(int col, int row) {
 		int counter = 1;
 		col -= 1; // Set to index values
-		int cRow = row - 1;
+		int cRow = row;
 
 		CellState player = board[row][col].getState();
 		boolean foundDifferent = false;
-		while (!foundDifferent && cRow < rows && counter < 4) {
+		while (!foundDifferent && cRow < rows-1 && counter < 4) {
 			if (board[cRow][col].getState() == player) {
 				counter++;
-				cRow--;
+				cRow++;
 			} else {
 				foundDifferent = true;
 			}
