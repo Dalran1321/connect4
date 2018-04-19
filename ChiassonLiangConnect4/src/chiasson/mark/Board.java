@@ -20,7 +20,7 @@ public class Board {
 	}
 
 	public CellState getState(int x, int y) {
-		return  board[x][y].getState();
+		return board[x][y].getState();
 	}
 
 	public boolean isValid(int x, int y) {
@@ -28,7 +28,7 @@ public class Board {
 	}
 
 	public boolean isColumnFilled(int col) {
-		if(board[0][col - 1].getState() != CellState.EMPTY) {
+		if (board[0][col - 1].getState() != CellState.EMPTY) {
 			return true;
 		}
 		return false;
@@ -36,33 +36,44 @@ public class Board {
 
 	public int place(int col, CellState player) {
 
-		int r = rows ;
-		int c = col -1 ;
+		int r = rows;
+		int c = col - 1;
 
 		boolean foundRow = false;
 		while (!foundRow) {
-			if (board[r-1][c].getState() == CellState.EMPTY) {
+			if (board[r - 1][c].getState() == CellState.EMPTY) {
 				foundRow = true;
-			}
-			r--;
+			} 
+				r--;
 		}
 		board[r][c].setState(player);
 		return r;
 	}
 
-	/*public boolean isVerticalWinner(int col) {
-		int counter =0;
-		if(place<=4) {
-			for (int i =0; i<=4; i++) {
-				if (board[r][col].getState() == board[r-i][col].getState())
+	public boolean isVerticalWinner(int col, int row) {
+		int counter = 1;
+		col -= 1; // Set to index values
+		int cRow = row - 1;
+
+		CellState player = board[row][col].getState();
+		boolean foundDifferent = false;
+		while (!foundDifferent && cRow < rows && counter < 4) {
+			if (board[cRow][col].getState() == player) {
 				counter++;
+				cRow--;
+			} else {
+				foundDifferent = true;
 			}
 		}
-		if (counter==4) {
-		return true;
-		}
-		return false;
-	}*/
+		return counter == 4;
+	}
+
+	/*
+	 * public boolean isHorizontalWinner(int col) { int counter =0; if(place<=4)
+	 * { for (int i =0; i<=4; i++) { if (board[r][col].getState() ==
+	 * board[r-i][col].getState()) counter++; } } if (counter>=4) { return true;
+	 * } return false; }
+	 */
 
 	public void display() {
 		System.out.println("CONNECT FOUR BOARD");

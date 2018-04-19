@@ -27,7 +27,7 @@ public class Driver {
 		int y = 0;
 		boolean error = false;
 		Random r = new Random();
-
+		int row = 0;
 		int turns = 1;
 		System.out.println("Connect four to win!");
 		System.out.println("Enter a number between 1-7 to select a column to put a chip into");
@@ -36,18 +36,19 @@ public class Driver {
 			y = 0;
 			int value = in.nextInt();
 			CellState c = CellState.P2;
-			// if (turns % 2 == 0){
-			// value = r.nextInt(7);
+			//if (turns % 2 == 0){
+			 //value = r.nextInt(7);
 			// c = CellState.P1;
-			// }
-
+			//}
+			
 			if (value >= 1 && value <= 7) {
 				if (board.isColumnFilled(value) == false) {
-					board.place(value, c);
-					/*if (board.isVerticalWinner(value) == true) {
-						System.out.println("Winner");
+					row =board.place(value, c);
+					board.display();
+					if (board.isVerticalWinner(value,row)) {
+						System.out.println("Vertical Winner");
 						done = true;
-					}*/
+					}
 				} else {
 					System.out.println("The column was filled pick a different one");
 					error = true;
