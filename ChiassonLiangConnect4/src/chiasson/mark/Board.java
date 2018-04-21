@@ -51,13 +51,13 @@ public class Board {
 	}
 
 	public boolean isVerticalWinner(int col, int row) {
-		int  counter = 0;
+		int counter = 0;
 		col -= 1; // Set to index values
 		int cRow = row;
 
 		CellState player = board[row][col].getState();
 		boolean foundDifferent = false;
-		while (!foundDifferent && cRow < rows  && counter < 4) {
+		while (!foundDifferent && cRow < rows && counter < 4) {
 			if (board[cRow][col].getState() == player) {
 				counter++;
 				cRow++;
@@ -72,7 +72,7 @@ public class Board {
 		int counter = 0;
 		col -= 1; // Set to index values
 		int cCol = col;
-		int cCol2 = col-1;
+		int cCol2 = col;
 
 		CellState player = board[row][col].getState();
 		boolean foundDifferentLeft = false;
@@ -85,8 +85,8 @@ public class Board {
 				foundDifferentLeft = true;
 			}
 		}
-		while (!foundDifferentRight && cCol2 >=0 && counter < 4) {
-			if (board[row][cCol2].getState() == player) {
+		while (!foundDifferentRight && cCol2 >= 0 && counter < 4) {
+			if (board[row][cCol2 - 1].getState() == player) {
 				counter++;
 				cCol2--;
 			} else {
@@ -95,7 +95,7 @@ public class Board {
 		}
 		return counter == 4;
 	}
-	
+
 	public boolean isDiagonalWinner(int col, int row) {
 		int counter = 0;
 		int counter2 = 0;
@@ -106,32 +106,72 @@ public class Board {
 		int cRow2 = row;
 
 		CellState player = board[row][col].getState();
-		boolean foundDifferentLeft = false;
-		boolean foundDifferentRight = false;
-		
-		//7 to 4  top left to bottom right
-		while (!foundDifferentLeft && cCol < cols && cRow < rows&& counter < 4) {
+		boolean foundDifferentDiagonalDown = false;
+		boolean foundDifferentDiagonalUp = false;
+
+		// bottom right to top left
+		while (!foundDifferentDiagonalDown && cCol >= 0 && cRow >= 0 && counter < 4) {
 			if (board[cRow][cCol].getState() == player) {
 				counter++;
-				cCol++;
-				cRow++;
+				cCol--;
+				cRow--;
+				System.out.println(" counter " + counter);
 			} else {
-				foundDifferentLeft = true;
+				foundDifferentDiagonalDown = true;
 			}
 		}
-		
-		//4 to 1 bottom left to top right 
-		while (!foundDifferentRight && cCol2 < cols&&  cRow2 >= 0 && counter2 < 4) {
-			if (board[cRow2][cCol2].getState() == player) {
-				counter2++;
+		// 7 to 4 top left to bottom right
+		while (!foundDifferentDiagonalUp && cCol2 + 1 < cols && cRow2 + 1 < rows && counter < 4) {
+			if (board[cRow2 + 1][cCol2 + 1].getState() == player) {
+				counter++;
 				cCol2++;
-				System.out.println(cRow2+" counter "+counter2);
-				cRow2--;
+				cRow2++;
+				System.out.println(" counter " + counter);
 			} else {
-				foundDifferentRight = true;
+				foundDifferentDiagonalUp = true;
 			}
 		}
-		return counter == 4 || counter2 ==4;
+
+		return counter == 4;
+	}
+
+	public boolean isDiagonalWinner2(int col, int row) {
+		int counter = 0;
+		int counter2 = 0;
+		col -= 1; // Set to index values
+		int cCol3 = col;
+		int cCol4 = col;
+		int cRow3 = row;
+		int cRow4 = row;
+
+		CellState player = board[row][col].getState();
+		boolean foundDifferentDiagonalDown = false;
+		boolean foundDifferentDiagonalUp = false;
+
+		// 4 to 1 top right to bottom left
+		while (!foundDifferentDiagonalDown && cCol3 >= 0 && cRow3 < rows && counter2 < 4) {
+			if (board[cRow3][cCol3].getState() == player) {
+				counter2++;
+				cCol3--;
+				cRow3++;
+				System.out.println(" counter2 " + counter2);
+			} else {
+				foundDifferentDiagonalDown = true;
+			}
+		}
+
+		// 4 to 1 bottom left to top right
+		while (!foundDifferentDiagonalUp && cCol4+1 < cols && cRow4-1 >= 0 && counter2 < 4) {
+			if (board[cRow4-1][cCol4+1].getState() == player) {
+				counter2++;
+				cCol4++;
+				cRow4--;
+				System.out.println(" counter2 " + counter2);
+			} else {
+				foundDifferentDiagonalUp = true;
+			}
+		}
+		return counter2 == 4;
 	}
 
 	public void display() {

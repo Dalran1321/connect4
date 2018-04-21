@@ -56,6 +56,10 @@ public class Driver {
 						System.out.println("Diagonal Winner");
 						done = true;
 					}
+					 if (board.isDiagonalWinner2(value,row)) {
+							System.out.println("Diagonal Winner2");
+							done = true;
+						}
 				} else {
 					System.out.println("The column was filled pick a different one");
 					error = true;
