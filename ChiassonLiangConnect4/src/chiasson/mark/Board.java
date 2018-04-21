@@ -85,7 +85,7 @@ public class Board {
 				foundDifferentLeft = true;
 			}
 		}
-		while (!foundDifferentRight && cCol2 >= 0 && counter < 4) {
+		while (!foundDifferentRight && cCol2-1 >= 0 && counter < 4) {
 			if (board[row][cCol2 - 1].getState() == player) {
 				counter++;
 				cCol2--;
