@@ -36,17 +36,20 @@ public class Driver {
 			y = 0;
 			int value = in.nextInt();
 			CellState c = CellState.P2;
-			//if (turns % 2 == 0){
+			if (turns % 2 == 0){
 			 //value = r.nextInt(7);
-			// c = CellState.P1;
-			//}
+			 c = CellState.P1;
+			}
 			
 			if (value >= 1 && value <= 7) {
 				if (board.isColumnFilled(value) == false) {
 					row =board.place(value, c);
-					board.display();
 					if (board.isVerticalWinner(value,row)) {
 						System.out.println("Vertical Winner");
+						done = true;
+					}
+					if (board.isHorizontalWinner(value,row)) {
+						System.out.println("Horizontal Winner");
 						done = true;
 					}
 				} else {
