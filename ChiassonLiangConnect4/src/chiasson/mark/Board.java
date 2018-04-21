@@ -89,13 +89,49 @@ public class Board {
 			if (board[row][cCol2].getState() == player) {
 				counter++;
 				cCol2--;
-				//System.out.println("col "+cCol2);
-				//System.out.println("counter "+counter);
 			} else {
 				foundDifferentRight = true;
 			}
 		}
 		return counter == 4;
+	}
+	
+	public boolean isDiagonalWinner(int col, int row) {
+		int counter = 0;
+		int counter2 = 0;
+		col -= 1; // Set to index values
+		int cCol = col;
+		int cCol2 = col;
+		int cRow = row;
+		int cRow2 = row;
+
+		CellState player = board[row][col].getState();
+		boolean foundDifferentLeft = false;
+		boolean foundDifferentRight = false;
+		
+		//7 to 4  top left to bottom right
+		while (!foundDifferentLeft && cCol < cols && cRow < rows&& counter < 4) {
+			if (board[cRow][cCol].getState() == player) {
+				counter++;
+				cCol++;
+				cRow++;
+			} else {
+				foundDifferentLeft = true;
+			}
+		}
+		
+		//4 to 1 bottom left to top right 
+		while (!foundDifferentRight && cCol2 < cols&&  cRow2 >= 0 && counter2 < 4) {
+			if (board[cRow2][cCol2].getState() == player) {
+				counter2++;
+				cCol2++;
+				System.out.println(cRow2+" counter "+counter2);
+				cRow2--;
+			} else {
+				foundDifferentRight = true;
+			}
+		}
+		return counter == 4 || counter2 ==4;
 	}
 
 	public void display() {
