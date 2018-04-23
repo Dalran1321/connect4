@@ -28,36 +28,41 @@ public class Driver {
 		boolean error = false;
 		Random r = new Random();
 		int row = 0;
-		int turns = 1;
+		int turns = 0;
+		int value =0;
+		 CellState c = CellState.P2;
 		System.out.println("Connect four to win!");
 		System.out.println("Enter a number between 1-7 to select a column to put a chip into");
 		while (!done && in.hasNextInt()) {
 			x = 0;
 			y = 0;
-			int value = in.nextInt();
-			CellState c = CellState.P2;
-			if (turns % 2 == 0){
-			 //value = r.nextInt(7);
-			//c = CellState.P1;
+			
+			if(turns % 2 != 0){
+			 value = in.nextInt();
+			 c = CellState.P2;
+			}
+			else{
+			 value = r.nextInt(7);
+			c = CellState.P1;
 			}
 			
 			if (value >= 1 && value <= 7) {
 				if (board.isColumnFilled(value) == false) {
 					row =board.place(value, c);
 					if (board.isVerticalWinner(value,row)) {
-						System.out.println("Vertical Winner");
+						System.out.println("Vertical Winner "+c+" won" );
 						done = true;
 					}
 					 if (board.isHorizontalWinner(value,row)) {
-						System.out.println("Horizontal Winner");
+						System.out.println("Horizontal Winner "+c+" won" );
 						done = true;
 					}
 					 if (board.isDiagonalWinner(value,row)) {
-						System.out.println("Diagonal Winner");
+						System.out.println("Diagonal Winner "+c+" won" );
 						done = true;
 					}
 					 if (board.isDiagonalWinner2(value,row)) {
-							System.out.println("Diagonal Winner2");
+							System.out.println("Diagonal Winner "+c+" won" );
 							done = true;
 						}
 				} else {

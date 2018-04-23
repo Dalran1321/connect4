@@ -67,6 +67,23 @@ public class Board {
 		}
 		return counter == 4;
 	}
+	public boolean isVerticalAI(int col, int row) {
+		int counter = 0;
+		col -= 1; // Set to index values
+		int cRow = row;
+
+		CellState player = board[row][col].getState();
+		boolean foundDifferent = false;
+		while (!foundDifferent && cRow < rows && counter < 3) {
+			if (board[cRow][col].getState() == player) {
+				counter++;
+				cRow++;
+			} else {
+				foundDifferent = true;
+			}
+		}
+		return counter == 3;
+	}
 
 	public boolean isHorizontalWinner(int col, int row) {
 		int counter = 0;
