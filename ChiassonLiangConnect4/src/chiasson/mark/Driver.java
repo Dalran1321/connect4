@@ -38,7 +38,7 @@ public class Driver {
 			CellState c = CellState.P2;
 			if (turns % 2 == 0){
 			 //value = r.nextInt(7);
-			c = CellState.P1;
+			//c = CellState.P1;
 			}
 			
 			if (value >= 1 && value <= 7) {
@@ -72,8 +72,8 @@ public class Driver {
 
 			if (error == false) {
 				turns++;
+				System.out.println(c+" turn: " + turns);
 				board.display();
-				System.out.println("turns " + turns);
 			}
 			error = false;
 		}

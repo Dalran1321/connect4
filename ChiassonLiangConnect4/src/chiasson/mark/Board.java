@@ -115,7 +115,6 @@ public class Board {
 				counter++;
 				cCol--;
 				cRow--;
-				System.out.println(" counter " + counter);
 			} else {
 				foundDifferentDiagonalDown = true;
 			}
@@ -126,7 +125,6 @@ public class Board {
 				counter++;
 				cCol2++;
 				cRow2++;
-				System.out.println(" counter " + counter);
 			} else {
 				foundDifferentDiagonalUp = true;
 			}
@@ -154,7 +152,6 @@ public class Board {
 				counter2++;
 				cCol3--;
 				cRow3++;
-				System.out.println(" counter2 " + counter2);
 			} else {
 				foundDifferentDiagonalDown = true;
 			}
@@ -166,7 +163,6 @@ public class Board {
 				counter2++;
 				cCol4++;
 				cRow4--;
-				System.out.println(" counter2 " + counter2);
 			} else {
 				foundDifferentDiagonalUp = true;
 			}
