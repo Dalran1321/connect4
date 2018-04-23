@@ -19,52 +19,60 @@ public class Driver {
 		Board board = new Board(ROWS, COLS);
 		board.display();
 
-
 		boolean done = false;
 
 		// Always fill from top left corner
-		int x = 0;
-		int y = 0;
+	
 		boolean error = false;
 		Random r = new Random();
 		int row = 0;
-		int turns = 0;
-		int value =0;
-		 CellState c = CellState.P2;
+		int turns = 1;
+		int temp = 0;
+		int value = 0;
+		CellState c = CellState.P2;
 		System.out.println("Connect four to win!");
+		System.out.println("Enter 1 for one player or any other number for two player mode");
+		int playerNum = in.nextInt();
 		System.out.println("Enter a number between 1-7 to select a column to put a chip into");
 		while (!done && in.hasNextInt()) {
-			x = 0;
-			y = 0;
-			
-			if(turns % 2 != 0){
-			 value = in.nextInt();
-			 c = CellState.P2;
+			if (turns % 2 != 0) {
+				value = in.nextInt();
+				temp = value;
+				c = CellState.P2;
 			}
-			else{
-			 value = r.nextInt(7);
-			c = CellState.P1;
+
+			else {
+				if (playerNum == 1) {
+					if (board.isVerticalAI(temp, row) && temp != 0) {
+						temp = 0;
+					} else {
+						value = r.nextInt(7);
+					}
+				} else {
+					value = in.nextInt();
+				}
+				c = CellState.P1;
 			}
-			
+
 			if (value >= 1 && value <= 7) {
 				if (board.isColumnFilled(value) == false) {
-					row =board.place(value, c);
-					if (board.isVerticalWinner(value,row)) {
-						System.out.println("Vertical Winner "+c+" won" );
+					row = board.place(value, c);
+					if (board.isVerticalWinner(value, row)) {
+						System.out.println("Vertical Winner " + c + " won");
 						done = true;
 					}
-					 if (board.isHorizontalWinner(value,row)) {
-						System.out.println("Horizontal Winner "+c+" won" );
+					if (board.isHorizontalWinner(value, row)) {
+						System.out.println("Horizontal Winner " + c + " won");
 						done = true;
 					}
-					 if (board.isDiagonalWinner(value,row)) {
-						System.out.println("Diagonal Winner "+c+" won" );
+					if (board.isDiagonalWinner(value, row)) {
+						System.out.println("Diagonal Winner " + c + " won");
 						done = true;
 					}
-					 if (board.isDiagonalWinner2(value,row)) {
-							System.out.println("Diagonal Winner "+c+" won" );
-							done = true;
-						}
+					if (board.isDiagonalWinner2(value, row)) {
+						System.out.println("Diagonal Winner " + c + " won");
+						done = true;
+					}
 				} else {
 					System.out.println("The column was filled pick a different one");
 					error = true;
@@ -77,7 +85,7 @@ public class Driver {
 
 			if (error == false) {
 				turns++;
-				System.out.println(c+" turn: " + turns);
+				System.out.println(c + " turn: " + turns);
 				board.display();
 			}
 			error = false;
