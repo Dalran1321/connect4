@@ -32,7 +32,7 @@ public class Driver {
 		CellState c = CellState.P2;
 		System.out.println("Connect four to win!");
 		System.out.println("Enter 1 for one player or any other number for two player mode");
-		int playerNum = in.nextInt();
+		int AIState = in.nextInt();
 		System.out.println("Enter a number between 1-7 to select a column to put a chip into");
 		while (!done && in.hasNextInt()) {
 			if (turns % 2 != 0) {
@@ -42,7 +42,7 @@ public class Driver {
 			}
 
 			else {
-				if (playerNum == 1) {
+				if (AIState == 1) {
 					if (board.isVerticalAI(temp, row) && temp != 0) {
 						temp = 0;
 					} else {
