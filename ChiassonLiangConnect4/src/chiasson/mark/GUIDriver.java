@@ -35,13 +35,32 @@ public class GUIDriver extends Application {
 		    columnBtns[i].setOnAction(new EventHandler<ActionEvent>(){
 				@Override
 				public void handle(ActionEvent event){
+				boolean done = false;
 				int c = ((ColumnButton)event.getSource()).getColumnValue();
-				if (!board.isColumnFilled(c)){
-					board.place(c, cState);
-				}
-				board.display();
+				if (!board.isColumnFilled(c) && !done ){
+					int row =board.place(c, cState);
+					cellBtns[c-1][row].setStyle("-fx-base: #f44242;");
+					if (board.isVerticalWinner(c, row)) {
+						System.out.println("Vertical Winner " +  cState+ " won");
+						done = true;
+					}
+					if (board.isHorizontalWinner(c, row)) {
+						System.out.println("Horizontal Winner " +  cState + " won");
+					done = true;
+					}
+					if (board.isDiagonalWinner(c, row)) {
+						System.out.println("Diagonal Winner " +  cState + " won");
+						done = true;
+					}
+					if (board.isDiagonalWinner2(c, row)) {
+						System.out.println("Diagonal Winner " +  cState + " won");
+						done = true;
+					}
 					
+				}
+			
 				
+				board.display();
 				
 				}
 			});
