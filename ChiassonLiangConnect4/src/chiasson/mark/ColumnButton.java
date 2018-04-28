@@ -24,4 +24,9 @@ public class ColumnButton extends Button {
 		return column;
 	}
 
+	public void remove(ColumnButton[] columnBtns) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
