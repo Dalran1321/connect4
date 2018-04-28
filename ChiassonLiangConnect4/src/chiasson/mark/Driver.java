@@ -22,7 +22,7 @@ public class Driver {
 		boolean done = false;
 
 		// Always fill from top left corner
-	
+
 		boolean error = false;
 		Random r = new Random();
 		int row = 0;
@@ -51,7 +51,7 @@ public class Driver {
 				} else {
 					value = in.nextInt();
 				}
-				c = CellState.P1;
+				//c = CellState.P1;
 			}
 
 			if (value >= 1 && value <= 7) {
@@ -65,11 +65,7 @@ public class Driver {
 						System.out.println("Horizontal Winner " + c + " won");
 						done = true;
 					}
-					if (board.isDiagonalWinner(value, row)) {
-						System.out.println("Diagonal Winner " + c + " won");
-						done = true;
-					}
-					if (board.isDiagonalWinner2(value, row)) {
+					if (board.isDiagonalWinner(value, row)|| board.isDiagonalWinner2(value, row)) {
 						System.out.println("Diagonal Winner " + c + " won");
 						done = true;
 					}
