@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * Program that allows the user to play the game connect four either with an AI
+ * or another person
+ *
+ * @author Fred Liang, Mark Chiasson,Aaron Robertson
+ * @version 1.0
+ */
 public class Driver {
 
 	public static void main(String[] args) throws InterruptedException {
@@ -20,38 +27,37 @@ public class Driver {
 		board.display();
 
 		boolean done = false;
-
-		// Always fill from top left corner
-
 		boolean error = false;
 		Random r = new Random();
 		int row = 0;
 		int turns = 1;
-		int temp = 0;
+		int playerMove = 0;
 		int value = 0;
 		CellState c = CellState.P2;
+
 		System.out.println("Connect four to win!");
 		System.out.println("Enter 1 for one player or any other number for two player mode");
 		int AIState = in.nextInt();
 		System.out.println("Enter a number between 1-7 to select a column to put a chip into");
+
 		while (!done && in.hasNextInt()) {
 			if (turns % 2 != 0) {
 				value = in.nextInt();
-				temp = value;
+				playerMove = value;
 				c = CellState.P2;
 			}
 
 			else {
 				if (AIState == 1) {
-					if (board.isVerticalAI(temp, row) && temp != 0) {
-						temp = 0;
+					if (board.isVerticalAI(playerMove, row) && playerMove != 0) {
+						playerMove = 0;
 					} else {
 						value = r.nextInt(7);
 					}
 				} else {
 					value = in.nextInt();
 				}
-				//c = CellState.P1;
+				c = CellState.P1;
 			}
 
 			if (value >= 1 && value <= 7) {
@@ -65,7 +71,7 @@ public class Driver {
 						System.out.println("Horizontal Winner " + c + " won");
 						done = true;
 					}
-					if (board.isDiagonalWinner(value, row)|| board.isDiagonalWinner2(value, row)) {
+					if (board.isDiagonalWinner(value, row) || board.isDiagonalWinner2(value, row)) {
 						System.out.println("Diagonal Winner " + c + " won");
 						done = true;
 					}

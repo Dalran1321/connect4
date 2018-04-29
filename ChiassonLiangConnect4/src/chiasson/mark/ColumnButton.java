@@ -5,7 +5,7 @@ import javafx.scene.control.Button;
 
 public class ColumnButton extends Button {
 	private int column;
-	
+
 	public ColumnButton(int col) {
 		column = col;
 	}
@@ -19,14 +19,11 @@ public class ColumnButton extends Button {
 		super(arg0, arg1);
 		column = col;
 	}
-	
-	public int getColumnValue(){
+
+	public int getColumnValue() {
 		return column;
 	}
 
-	public void remove(ColumnButton[] columnBtns) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }

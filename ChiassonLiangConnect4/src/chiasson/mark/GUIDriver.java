@@ -10,6 +10,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+/**
+ * Program that uses GUI to allow the user to play the game connect four either
+ * with an AI or another person
+ *
+ * @author Fred Liang, Mark Chiasson,Aaron Robertson
+ * @version 1.0
+ */
 public class GUIDriver extends Application {
 
 	ColumnButton[] columnBtns = new ColumnButton[7];
@@ -36,7 +43,7 @@ public class GUIDriver extends Application {
 
 				@Override
 				public void handle(ActionEvent event) {
-					String winCon ="";
+					String winCon = "";
 					boolean done = false;
 
 					int c = ((ColumnButton) event.getSource()).getColumnValue();
@@ -76,9 +83,7 @@ public class GUIDriver extends Application {
 							columnBtns[0].prefWidthProperty().bind(columnSelector.widthProperty());
 						}
 					}
-
 					board.display();
-
 				}
 			});
 		}
@@ -86,7 +91,8 @@ public class GUIDriver extends Application {
 		GridPane gp = new GridPane();
 		for (int row = 0; row < cellBtns.length; row++) {
 			for (int col = 0; col < cellBtns[0].length; col++) {
-				cellBtns[row][col] = new Button(".....");
+				cellBtns[row][col] = new Button("+");
+				cellBtns[row][col].prefWidthProperty().bind(columnSelector.widthProperty());
 				cellBtns[row][col].setStyle("-fx-base: #C0C0C0;");
 				gp.add(cellBtns[row][col], row, col);
 			}
