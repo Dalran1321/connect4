@@ -3,14 +3,19 @@ package chiasson.mark;
 import java.util.Random;
 
 import javafx.application.Application;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.stage.Popup;
 import javafx.stage.Stage;
 
 /**
@@ -37,11 +42,11 @@ public class GUIDriver extends Application {
 
 	public static void main(String[] args) {
 		launch(args);
-
 	}
 
 	@Override
 	public void start(Stage window) throws Exception {
+	
 		VBox area = new VBox();
 		HBox columnSelector = new HBox();
 		for (int i = 0; i < columnBtns.length; i++) {
@@ -57,8 +62,10 @@ public class GUIDriver extends Application {
 					if (humanTurn) {
 						c = ((ColumnButton) event.getSource()).getColumnValue();
 						lastCol = c;
+						if (isSinglePlayer) {
 						humanTurn = false;
-					} else {
+						}
+					} else if (isSinglePlayer) {
 						if (board.isVerticalAI(lastCol, row)) {
 							c = lastCol;
 
@@ -124,11 +131,47 @@ public class GUIDriver extends Application {
 			}
 
 		}
-		area.getChildren().add(columnSelector);
-		area.getChildren().add(gp);
-
-		Scene scene = new Scene(area);
-		window.setScene(scene);
+		final Popup popup = new Popup();
+		popup.setX(300);
+		popup.setY(300);
+		VBox layout = new VBox(10);
+		Button pvp = new Button("PVP");
+		Button pv1 = new Button("PV1");
+		Label label = new Label("PVP or PV1");
+		label.setAlignment(Pos.BASELINE_CENTER);
+		pvp.setAlignment(Pos.BASELINE_CENTER);
+		pv1.setAlignment(Pos.BASELINE_CENTER);
+		label.prefWidthProperty().bind(layout.widthProperty());
+		pvp.prefWidthProperty().bind(layout.widthProperty());
+		pv1.prefWidthProperty().bind(layout.widthProperty());
+		pvp.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				popup.show(window);
+				 isSinglePlayer = false;
+				area.getChildren().add(columnSelector);
+				area.getChildren().add(gp);
+				Scene scene = new Scene(area);
+				window.setScene(scene);
+				window.show();
+			}
+		});
+		pv1.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				popup.show(window);
+				area.getChildren().add(columnSelector);
+				area.getChildren().add(gp);
+				Scene scene = new Scene(area);
+				window.setScene(scene);
+				window.show();
+			}
+		});
+		
+		
+		
+		layout.getChildren().addAll(label,pvp,pv1);
+		window.setScene(new Scene(layout));
 		window.show();
 
 	}
