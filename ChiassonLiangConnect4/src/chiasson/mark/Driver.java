@@ -10,7 +10,7 @@ import java.util.Random;
  * or another person
  *
  * @author Fred Liang, Mark Chiasson,Aaron Robertson
- * @version 1.2
+ * @version 1.0
  */
 public class Driver {
 
@@ -40,7 +40,7 @@ public class Driver {
 		int AIState = in.nextInt();
 		System.out.println("Enter a number between 1-7 to select a column to put a chip into");
 
-		while (!done && in.hasNextInt()) {
+		while (!done) {
 			if (turns % 2 != 0) {
 				value = in.nextInt();
 				playerMove = value;
@@ -49,13 +49,11 @@ public class Driver {
 
 			else {
 				if (AIState == 1) {
-					if (board.isVerticalAI(playerMove, row) && playerMove != 0) {
-						playerMove = 0;
-					} else {
-						value = r.nextInt(7);
+					if (!board.isVerticalAI(playerMove, row)) {
+						value = r.nextInt(7); // generate random column value
 					}
 				} else {
-					value = in.nextInt();
+					value = in.nextInt(); // obtain user column value
 				}
 				c = CellState.P1;
 			}

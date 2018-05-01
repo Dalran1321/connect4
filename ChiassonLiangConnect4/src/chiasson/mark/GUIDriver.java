@@ -1,8 +1,11 @@
 package chiasson.mark;
 
+import java.util.Random;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
@@ -14,7 +17,7 @@ import javafx.stage.Stage;
  * Program that uses GUI to allow the user to play the game connect four either
  * with an AI or another person
  *
- * @author Fred Liang, Mark Chiasson,Aaron Robertson
+ * @author Fred Liang, Mark Chiasson, Aaron Robertson
  * @version 1.0
  */
 public class GUIDriver extends Application {
@@ -26,6 +29,11 @@ public class GUIDriver extends Application {
 	// create the board
 	Board board = new Board(ROWS, COLS);
 	CellState cState = CellState.P2;
+	boolean isSinglePlayer = true;
+	boolean humanTurn = true;
+	Random r = new Random();
+	int lastCol = 1;
+	int row = 0;// update
 
 	public static void main(String[] args) {
 		launch(args);
@@ -45,10 +53,23 @@ public class GUIDriver extends Application {
 				public void handle(ActionEvent event) {
 					String winCon = "";
 					boolean done = false;
+					int c = 0;
+					if (humanTurn) {
+						c = ((ColumnButton) event.getSource()).getColumnValue();
+						lastCol = c;
+						humanTurn = false;
+					} else {
+						if (board.isVerticalAI(lastCol, row)) {
+							c = lastCol;
 
-					int c = ((ColumnButton) event.getSource()).getColumnValue();
+						} else {
+							c = r.nextInt(7) + 1; // # generate random column
+						}
+						humanTurn = true;
+					}
+
 					if (!board.isColumnFilled(c)) {
-						int row = board.place(c, cState);
+						row = board.place(c, cState);
 
 						if (cState != CellState.P1) {
 							cState = CellState.P1;
@@ -78,10 +99,15 @@ public class GUIDriver extends Application {
 					if (done == true) {
 						for (int i = 1; i < columnBtns.length; i++) {
 							columnSelector.getChildren().remove(columnBtns[i]);
-							columnBtns[0].setDisable(done == true);
-							columnBtns[0].setText(winCon);
-							columnBtns[0].prefWidthProperty().bind(columnSelector.widthProperty());
 						}
+						columnBtns[0].setDisable(done == true);
+						columnBtns[0].setText(winCon);
+						columnBtns[0].setAlignment(Pos.BASELINE_CENTER);
+						columnBtns[0].prefWidthProperty().bind(columnSelector.widthProperty());
+
+					}
+					if (!humanTurn) {
+						columnBtns[0].fire();
 					}
 					board.display();
 				}
@@ -91,7 +117,7 @@ public class GUIDriver extends Application {
 		GridPane gp = new GridPane();
 		for (int row = 0; row < cellBtns.length; row++) {
 			for (int col = 0; col < cellBtns[0].length; col++) {
-				cellBtns[row][col] = new Button("+");
+				cellBtns[row][col] = new Button(" ");
 				cellBtns[row][col].prefWidthProperty().bind(columnSelector.widthProperty());
 				cellBtns[row][col].setStyle("-fx-base: #C0C0C0;");
 				gp.add(cellBtns[row][col], row, col);
