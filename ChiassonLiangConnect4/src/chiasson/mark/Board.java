@@ -54,12 +54,6 @@ public class Board {
 		}
 		return false;
 	}
-	public boolean isSpaceNotFilled(int col, int row ) {
-		if (board[row][col-1].getState() == CellState.EMPTY) {
-			return true;
-		}
-		return false;
-	}
 	public boolean isSpaceFilled(int col, int row ) {
 		if (board[row][col-1].getState() != CellState.EMPTY) {
 			return true;

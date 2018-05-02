@@ -74,10 +74,10 @@ public class GUIDriver extends Application {
 
 						} 
 						else if(board.isHorizontalAI(lastCol, row)){
-							if(lastCol !=1&&board.isSpaceNotFilled(lastCol-1, row)&& (row ==5 ||!board.isSpaceFilled(lastCol+1, row+1))) {
+							if(lastCol !=1&&!board.isSpaceFilled(lastCol-1, row)&& (row ==5 ||board.isSpaceFilled(lastCol+1, row+1))) {
 								c = lastCol-1;
 							}
-							else if(lastCol !=7&& board.isSpaceNotFilled(lastCol+1, row) && (row ==5 ||!board.isSpaceFilled(lastCol+1, row+1))) {
+							else if(lastCol !=7&& !board.isSpaceFilled(lastCol+1, row) && (row ==5 ||board.isSpaceFilled(lastCol+1, row+1))) {
 								c = lastCol+1;
 							}
 							else {
