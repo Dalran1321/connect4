@@ -46,7 +46,7 @@ public class GUIDriver extends Application {
 
 	@Override
 	public void start(Stage window) throws Exception {
-	
+
 		VBox area = new VBox();
 		HBox columnSelector = new HBox();
 		for (int i = 0; i < columnBtns.length; i++) {
@@ -63,7 +63,7 @@ public class GUIDriver extends Application {
 						c = ((ColumnButton) event.getSource()).getColumnValue();
 						lastCol = c;
 						if (isSinglePlayer) {
-						humanTurn = false;
+							humanTurn = false;
 						}
 					} else if (isSinglePlayer) {
 						if (board.isVerticalAI(lastCol, row)) {
@@ -84,8 +84,13 @@ public class GUIDriver extends Application {
 							cellBtns[c - 1][row].setStyle("-fx-base: #2A4CD8;");
 						} else {
 							cState = CellState.P2;
-							cellBtns[c - 1][row].setText(String.valueOf(cState));
-							cellBtns[c - 1][row].setStyle("-fx-base:  #f44242;");
+							if (!isSinglePlayer) {
+								cellBtns[c - 1][row].setText(String.valueOf(cState));
+								cellBtns[c - 1][row].setStyle("-fx-base:  #f44242;");
+							} else {
+								cellBtns[c - 1][row].setText(String.valueOf("AI"));
+								cellBtns[c - 1][row].setStyle("-fx-base: #f5f907");
+							}
 						}
 						if (board.isVerticalWinner(c, row)) {
 							winCon = "Vertical Winner " + cState + " Won!";
@@ -132,23 +137,25 @@ public class GUIDriver extends Application {
 
 		}
 		final Popup popup = new Popup();
-		popup.setX(300);
-		popup.setY(300);
-		VBox layout = new VBox(10);
+
+		VBox layout = new VBox(1);
 		Button pvp = new Button("PVP");
 		Button pv1 = new Button("PV1");
-		Label label = new Label("PVP or PV1");
-		label.setAlignment(Pos.BASELINE_CENTER);
+		Button option = new Button("PVP or PV1");
+		option.setAlignment(Pos.BASELINE_CENTER);
 		pvp.setAlignment(Pos.BASELINE_CENTER);
 		pv1.setAlignment(Pos.BASELINE_CENTER);
-		label.prefWidthProperty().bind(layout.widthProperty());
+		option.prefWidthProperty().bind(layout.widthProperty());
 		pvp.prefWidthProperty().bind(layout.widthProperty());
 		pv1.prefWidthProperty().bind(layout.widthProperty());
+		pvp.setStyle("-fx-base:  #f44242;");
+		option.setStyle("-fx-base: #2A4CD8;");
+		pv1.setStyle("-fx-base:#f5f907");
 		pvp.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
 				popup.show(window);
-				 isSinglePlayer = false;
+				isSinglePlayer = false;
 				area.getChildren().add(columnSelector);
 				area.getChildren().add(gp);
 				Scene scene = new Scene(area);
@@ -167,10 +174,8 @@ public class GUIDriver extends Application {
 				window.show();
 			}
 		});
-		
-		
-		
-		layout.getChildren().addAll(label,pvp,pv1);
+
+		layout.getChildren().addAll(option, pvp, pv1);
 		window.setScene(new Scene(layout));
 		window.show();
 
