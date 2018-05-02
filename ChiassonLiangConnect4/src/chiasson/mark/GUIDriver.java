@@ -34,6 +34,7 @@ public class GUIDriver extends Application {
 	// create the board
 	Board board = new Board(ROWS, COLS);
 	CellState cState = CellState.P2;
+	String turn = String.valueOf(cState);
 	boolean isSinglePlayer = true;
 	boolean humanTurn = true;
 	Random r = new Random();
@@ -60,16 +61,30 @@ public class GUIDriver extends Application {
 					boolean done = false;
 					int c = 0;
 					if (humanTurn) {
+						turn = String.valueOf(cState);
 						c = ((ColumnButton) event.getSource()).getColumnValue();
 						lastCol = c;
 						if (isSinglePlayer) {
 							humanTurn = false;
 						}
 					} else if (isSinglePlayer) {
+						turn = "AI";
 						if (board.isVerticalAI(lastCol, row)) {
 							c = lastCol;
 
-						} else {
+						} 
+						else if(board.isHorizontalAI(lastCol, row)){
+							if(lastCol !=1&&board.isSpaceNotFilled(lastCol-1, row)&& (row ==5 ||!board.isSpaceFilled(lastCol+1, row+1))) {
+								c = lastCol-1;
+							}
+							else if(lastCol !=7&& board.isSpaceNotFilled(lastCol+1, row) && (row ==5 ||!board.isSpaceFilled(lastCol+1, row+1))) {
+								c = lastCol+1;
+							}
+							else {
+								c = r.nextInt(7) + 1; // # generate random column
+							}
+						}
+						else {
 							c = r.nextInt(7) + 1; // # generate random column
 						}
 						humanTurn = true;
@@ -92,18 +107,19 @@ public class GUIDriver extends Application {
 								cellBtns[c - 1][row].setStyle("-fx-base: #f5f907");
 							}
 						}
+						
 						if (board.isVerticalWinner(c, row)) {
-							winCon = "Vertical Winner " + cState + " Won!";
+							winCon = "Vertical Winner " + turn + " Won!";
 							System.out.println(winCon);
 							done = true;
 						}
 						if (board.isHorizontalWinner(c, row)) {
-							winCon = "Horizontal Winner " + cState + " Won!";
+							winCon = "Horizontal Winner " + turn + " Won!";
 							System.out.println(winCon);
 							done = true;
 						}
 						if (board.isDiagonalWinner(c, row) || board.isDiagonalWinner2(c, row)) {
-							winCon = "Diagonal Winner " + cState + " Won!";
+							winCon = "Diagonal Winner " + turn + " Won!";
 							System.out.println(winCon);
 							done = true;
 						}

@@ -54,6 +54,18 @@ public class Board {
 		}
 		return false;
 	}
+	public boolean isSpaceNotFilled(int col, int row ) {
+		if (board[row][col-1].getState() == CellState.EMPTY) {
+			return true;
+		}
+		return false;
+	}
+	public boolean isSpaceFilled(int col, int row ) {
+		if (board[row][col-1].getState() != CellState.EMPTY) {
+			return true;
+		}
+		return false;
+	}
 
 	/**
 	 * Provides the state of the current cell
@@ -185,7 +197,33 @@ public class Board {
 		}
 		return counter == 4;
 	}
+	public boolean isHorizontalAI(int col, int row) {
+		int counter = 0;
+		col -= 1; // Set to index values
+		int cCol = col;
 
+		CellState player = board[row][col].getState();
+		boolean foundDifferent = false;
+		boolean foundDifferent2 = false;
+		while (!foundDifferent && cCol < cols && counter < 2) {
+			if (board[row][cCol].getState() == player) {
+				counter++;
+				cCol++;
+			} else {
+				foundDifferent = true;
+			}
+		}
+		cCol = col;
+		while (!foundDifferent2 && cCol - 1 >= 0 && counter < 2) {
+			if (board[row][cCol - 1].getState() == player) {
+				counter++;
+				cCol--;
+			} else {
+				foundDifferent2 = true;
+			}
+		}
+		return counter == 2;
+	}
 	/**
 	 * Determines if the current player has won diagonally from the top left to the
 	 * bottom right. Checks if the current player has four cells of their state in a
@@ -303,4 +341,5 @@ public class Board {
 			System.out.println();
 		}
 	}
+
 }
