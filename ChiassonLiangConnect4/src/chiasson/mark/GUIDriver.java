@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  * with an AI or another person
  *
  * @author Fred Liang, Mark Chiasson, Aaron Robertson
- * @version 1.0
+ * @version 1.2
  */
 public class GUIDriver extends Application {
 
