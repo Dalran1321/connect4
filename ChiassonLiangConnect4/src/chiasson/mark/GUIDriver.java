@@ -8,6 +8,8 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -72,19 +74,18 @@ public class GUIDriver extends Application {
 						if (board.isVerticalAI(lastCol, row)) {
 							c = lastCol;
 
-						} 
-						else if(board.isHorizontalAI(lastCol, row)){
-							if(lastCol !=1&&!board.isSpaceFilled(lastCol-1, row)&& (row ==5 ||board.isSpaceFilled(lastCol+1, row+1))) {
-								c = lastCol-1;
+						} else if (board.isHorizontalAI(lastCol, row)) {
+							if (lastCol != 1 && !board.isSpaceFilled(lastCol - 1, row)
+									&& (row == 5 || board.isSpaceFilled(lastCol + 1, row + 1))) {
+								c = lastCol - 1;
+							} else if (lastCol != 7 && !board.isSpaceFilled(lastCol + 1, row)
+									&& (row == 5 || board.isSpaceFilled(lastCol + 1, row + 1))) {
+								c = lastCol + 1;
+							} else {
+								c = r.nextInt(7) + 1; // # generate random
+														// column
 							}
-							else if(lastCol !=7&& !board.isSpaceFilled(lastCol+1, row) && (row ==5 ||board.isSpaceFilled(lastCol+1, row+1))) {
-								c = lastCol+1;
-							}
-							else {
-								c = r.nextInt(7) + 1; // # generate random column
-							}
-						}
-						else {
+						} else {
 							c = r.nextInt(7) + 1; // # generate random column
 						}
 						humanTurn = true;
@@ -107,7 +108,7 @@ public class GUIDriver extends Application {
 								cellBtns[c - 1][row].setStyle("-fx-base: #f5f907");
 							}
 						}
-						
+
 						if (board.isVerticalWinner(c, row)) {
 							winCon = "Vertical Winner " + turn + " Won!";
 							System.out.println(winCon);
@@ -123,6 +124,13 @@ public class GUIDriver extends Application {
 							System.out.println(winCon);
 							done = true;
 						}
+					} else {
+						Alert alert = new Alert(AlertType.ERROR);
+						alert.setTitle("Connect4 Error");
+						alert.setHeaderText("The column you selected is full.");
+						alert.setContentText("Please select another column.");
+						alert.showAndWait();
+						humanTurn = true;
 					}
 					if (done == true) {
 						for (int i = 1; i < columnBtns.length; i++) {
