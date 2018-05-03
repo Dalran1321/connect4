@@ -55,9 +55,11 @@ public class Cell {
 		case EMPTY:
 			return "-";
 		case P1:
-			return "R";
-		case P2:
 			return "B";
+		case P2:
+			return "R";
+		case AI:
+			return "Y";
 		default:
 			return "-";
 		}

@@ -7,5 +7,5 @@ package chiasson.mark;
  * @version 1.0
  */
 public enum CellState {
-	P1, P2, EMPTY
+	P1, P2, AI, EMPTY
 }
