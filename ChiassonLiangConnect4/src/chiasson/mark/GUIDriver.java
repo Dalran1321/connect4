@@ -136,6 +136,13 @@ public class GUIDriver extends Application {
 						for (int i = 1; i < columnBtns.length; i++) {
 							columnSelector.getChildren().remove(columnBtns[i]);
 						}
+						Alert alert = new Alert(AlertType.INFORMATION);
+						alert.setTitle("Information Dialog");
+						alert.setHeaderText("Congrats! " + turn);
+						// alert.setContentText("Winner winner chicken
+						// dinner.");
+
+						alert.showAndWait();
 						columnBtns[0].setDisable(done == true);
 						columnBtns[0].setText(winCon);
 						columnBtns[0].setAlignment(Pos.BASELINE_CENTER);

@@ -99,7 +99,7 @@ public class Board {
 	 * @param col
 	 *            -the column of the current cell
 	 * 
-	 * @return
+	 * @return true when the cells of the current player's state are 4 in a row else false
 	 */
 	public boolean isVerticalWinner(int col, int row) {
 		int counter = 0;
@@ -130,7 +130,7 @@ public class Board {
 	 * @param col
 	 *            -the column of the current cell
 	 * 
-	 * @return
+	 * @return true when the cells of the player's state are 3 in a row else false
 	 */
 	public boolean isVerticalAI(int col, int row) {
 		int counter = 0;
@@ -162,7 +162,7 @@ public class Board {
 	 * @param col
 	 *            -the column of the current cell
 	 * 
-	 * @return
+	 * @return true when the cells of the current player's state are 4 in a row else false
 	 */
 	public boolean isHorizontalWinner(int col, int row) {
 		int counter = 0;
@@ -191,6 +191,20 @@ public class Board {
 		}
 		return counter == 4;
 	}
+	/**
+	 * Determines if the player has two cells in a row of their state horizontally.
+	 * If so the AI would block the player from getting four in a row by placing
+	 * their piece on the column as the player
+	 * 
+	 * 
+	 * @param row
+	 *            -the row of the current cell
+	 * 
+	 * @param col
+	 *            -the column of the current cell
+	 * 
+	 * @return true when the cells of the player's state are 2 in a row horizontally else false
+	 */
 	public boolean isHorizontalAI(int col, int row) {
 		int counter = 0;
 		col -= 1; // Set to index values
@@ -231,7 +245,7 @@ public class Board {
 	 * @param col
 	 *            -the column of the current cell
 	 * 
-	 * @return
+	 * @return true when the cells of the current player's state are 4 in a row else false
 	 */
 	public boolean isDiagonalWinner(int col, int row) {
 		int counter = 0;
@@ -284,7 +298,7 @@ public class Board {
 	 * @param col
 	 *            -the column of the current cell
 	 * 
-	 * @return
+	 * @return true when the cells of the current player's state are 4 in a row else false
 	 */
 	public boolean isDiagonalWinner2(int col, int row) {
 		int counter = 0;
