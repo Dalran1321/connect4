@@ -2,7 +2,12 @@ package chiasson.mark;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-
+/**
+ * Represents the column button in the GUI
+ *
+ * @author Fred Liang, Mark Chiasson,Aaron Robertson
+ * @version 1.0
+ */
 public class ColumnButton extends Button {
 	private int column;
 

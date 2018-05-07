@@ -191,7 +191,6 @@ public class GUIDriver extends Application {
 				area.getChildren().add(gp);
 				Scene scene = new Scene(area);
 				window.setScene(scene);
-				window.show();
 			}
 		});
 		pv1.setOnAction(new EventHandler<ActionEvent>() {
@@ -202,7 +201,6 @@ public class GUIDriver extends Application {
 				area.getChildren().add(gp);
 				Scene scene = new Scene(area);
 				window.setScene(scene);
-				window.show();
 			}
 		});
 
