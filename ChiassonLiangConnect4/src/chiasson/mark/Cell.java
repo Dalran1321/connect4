@@ -58,8 +58,6 @@ public class Cell {
 			return "B";
 		case P2:
 			return "R";
-		case AI:
-			return "Y";
 		default:
 			return "-";
 		}

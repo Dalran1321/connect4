@@ -25,7 +25,7 @@ import javafx.stage.Stage;
  * with an AI or another person
  *
  * @author Fred Liang, Mark Chiasson, Aaron Robertson
- * @version 1.2
+ * @version 1.0
  */
 public class GUIDriver extends Application {
 
@@ -36,6 +36,7 @@ public class GUIDriver extends Application {
 	// create the board
 	Board board = new Board(ROWS, COLS);
 	CellState cState = CellState.P2;
+	String turn = String.valueOf(cState);
 	boolean isSinglePlayer = true;
 	boolean humanTurn = true;
 	Random r = new Random();
@@ -90,33 +91,36 @@ public class GUIDriver extends Application {
 
 					if (!board.isColumnFilled(c)) {
 						row = board.place(c, cState);
-
 						if (cState != CellState.P1) {
 							cState = CellState.P1;
+							turn = String.valueOf(cState);
 							cellBtns[c - 1][row].setText(String.valueOf(cState));
 							cellBtns[c - 1][row].setStyle("-fx-base: #2A4CD8;");
-						} else if (isSinglePlayer) {
-							cState = CellState.AI;
-							cellBtns[c - 1][row].setText(String.valueOf(cState));
-							cellBtns[c - 1][row].setStyle("-fx-base: #f5f907");
 						} else {
 							cState = CellState.P2;
-							cellBtns[c - 1][row].setText(String.valueOf(cState));
-							cellBtns[c - 1][row].setStyle("-fx-base:  #f44242;");
+							if (!isSinglePlayer) {
+								turn =String.valueOf(cState);
+								cellBtns[c - 1][row].setText(String.valueOf(cState));
+								cellBtns[c - 1][row].setStyle("-fx-base:  #f44242;");
+							} else if (isSinglePlayer) {
+								turn = "AI";
+								cellBtns[c - 1][row].setText(String.valueOf("AI"));
+								cellBtns[c - 1][row].setStyle("-fx-base: #f5f907");
+							}
 						}
 
 						if (board.isVerticalWinner(c, row)) {
-							winCon = "Vertical Winner " + cState + " Won!";
+							winCon = "Vertical Winner " + turn + " Won!";
 							System.out.println(winCon);
 							done = true;
 						}
 						if (board.isHorizontalWinner(c, row)) {
-							winCon = "Horizontal Winner " + cState + " Won!";
+							winCon = "Horizontal Winner " + turn + " Won!";
 							System.out.println(winCon);
 							done = true;
 						}
 						if (board.isDiagonalWinner(c, row) || board.isDiagonalWinner2(c, row)) {
-							winCon = "Diagonal Winner " + cState + " Won!";
+							winCon = "Diagonal Winner " + turn + " Won!";
 							System.out.println(winCon);
 							done = true;
 						}
@@ -124,7 +128,7 @@ public class GUIDriver extends Application {
 						Alert alert = new Alert(AlertType.ERROR);
 						alert.setTitle("Connect4 Error");
 						alert.setHeaderText("The column you selected is full.");
-						alert.setContentText("Please select different column.");
+						alert.setContentText("Please select another column.");
 						alert.showAndWait();
 						humanTurn = true;
 					}
@@ -134,7 +138,7 @@ public class GUIDriver extends Application {
 						}
 						Alert alert = new Alert(AlertType.INFORMATION);
 						alert.setTitle("Information Dialog");
-						alert.setHeaderText("Congrats! " + cState);
+						alert.setHeaderText("Congrats! " + turn);
 						// alert.setContentText("Winner winner chicken
 						// dinner.");
 
